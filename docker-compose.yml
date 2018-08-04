@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  stockpurchase:
+    build: stockpurchase_component/
+    depends_on: 
+      - 'stockpurchase_db'
+    links:
+      - 'stockpurchase_db'
+    ports:
+      - '3009:3009'
+
+
+  stockpurchase_db:
+    build: stockpurchase_db/
+    image: mysql/mysql-server:lastest
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: bobbinhood
+
+    ports:
+      - '3306:3306'
